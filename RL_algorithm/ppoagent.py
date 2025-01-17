@@ -657,12 +657,10 @@ import torch
 # from ppo_module import ActorCritic, PPO
 
 def main():
-    # Initialize the environment
-    env = gym.make("CartPole-v1")
-    eval_env =gym.make("CartPole-v1")
-    # Set seeds for reproducibility
+    env = gym.make("CartPole-v1") # Change to your environment 
+    eval_env =gym.make("CartPole-v1") # enviroment is created 
     seed = 42
-    env.reset(seed=seed)
+    env.reset(seed=seed) 
     eval_env.reset(seed=seed + 1)
     torch.manual_seed(seed)
     import numpy as np
@@ -686,7 +684,7 @@ def main():
         target_kl=0.01,
         tensorboard_log="./ppo_cartpole_tensorboard/",
         device="cpu",  # Change to "cuda" if GPU is available
-        seed=seed,
+        seed=seed, # change the seed to the same as the one used in the training
     )
 
     # Define total timesteps for training
@@ -704,7 +702,7 @@ def main():
     print("Training completed.")
 
     # Save the trained model
-    ppo_agent.save(r"C:\Users\heman\Desktop\Notes\ppo_cartpole.pth")
+    ppo_agent.save("ppo_cartpole.pth")
 
     # Evaluate the trained agent
     # avg_reward = ppo_agent.evaluate(eval_env, episodes=1000)
